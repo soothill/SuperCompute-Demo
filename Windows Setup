@@ -1,0 +1,53 @@
+#Install Hyper-V
+
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+
+# Install WSL
+
+wsl --install
+
+# Setup time sync to local server
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\W32Time\Config" -Name "AnnounceFlags" -Value 5 
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\w32time\Parameters" -Name "NtpServer" -Value 10.10.100.247
+Restart-Service w32Time
+w32tm /resync
+
+
+# Install SNMP
+
+Get-WindowsCapability -Online -Name "*SNMP*"|select name,DisplayName,State
+
+Add-WindowsCapability -Online -Name “SNMP.Client~~~~0.0.1.0“
+
+# Enable systemd in WSL
+
+# Create /etc/wsl.conf
+
+
+[boot]
+systemd=true
+
+# Install docker in WSL
+
+sudo apt-get update -y
+
+ sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+
+
+
+
+
+
