@@ -8,4 +8,4 @@ remove-vm -name "Node 2" -Force
 remove-vm -name "Node 3" -Force
 remove-vm -name "Node 4" -Force
 
-rm c:\croit\*.vhdx
+remove-item c:\croit\*.vhdx
