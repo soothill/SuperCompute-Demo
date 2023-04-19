@@ -41,9 +41,11 @@ echo \
 sudo apt update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
+sudo usermod -a -G docker croit
 
 
 
 
+# Add user to local groups needs to be run as an administrator
 
-
+net localgroup administrators croit /add
