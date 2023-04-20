@@ -1,7 +1,7 @@
-stop-vm -name "Node 1"
-stop-vm -name "Node 2"
-stop-vm -name "Node 3"
-stop-vm -name "Node 4"
+stop-vm -name "Node 1" -Force
+stop-vm -name "Node 2" -Force
+stop-vm -name "Node 3" -Force
+stop-vm -name "Node 4" -Force
 
 remove-vm -name "Node 1" -Force
 remove-vm -name "Node 2" -Force

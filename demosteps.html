@@ -1,0 +1,24 @@
+
+
+ Create images directory in /mnt/c/
+
+md /mnt/c/images
+
+Pull images json file from api server
+
+curl -sSL https://api.croit.io/v2/images > /mnt/c/images/images.json
+
+In docker container create tar file of images directory
+
+docker exec -it croit bash -c 'tar -cvf /images/images.tar.gz /images'
+
+Copy Images tar file to WSL host
+
+docker cp croit:/images/images.tar.gz /mnt/c/images/.
+
+Extract Images directory
+
+tar -xvf images.tar.gz --directory /mnt/c/
+
+
+
