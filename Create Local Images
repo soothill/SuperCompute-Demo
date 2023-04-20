@@ -1,0 +1,16 @@
+# Fire up docker container
+
+# Wait for it sync with croit online to pull latest image versions down.
+
+# Pull a copy of the images.json file to local disk
+
+# These commands to be run inside WSL
+
+curl -sSL https://api.croit.io/v2/images > /mnt/c/images/images.json
+
+docker exec -it croit bash -c 'tar -cvf /images/images.tar.gz /images'
+
+docker cp croit:/images/images.tar.gz /mnt/c/images/images.tar.gz
+
+tar -xvf /mnt/c/images.tar.gz --directory /mnt/c/
+
